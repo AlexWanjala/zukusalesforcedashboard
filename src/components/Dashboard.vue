@@ -629,6 +629,17 @@
 
         },
         methods: {
+            getStatus(time) {
+                const now = Date.now();
+                const then = Date.parse(time);
+                const elapsed = now - then;
+                if (elapsed < 7200000) {
+                    return "Active";
+                } else if (elapsed < 259200000) {
+                    return "Inactive";
+                } else {
+                    return "Dormant";
+                }},
             formattedDate(date) {
 
                 var data =  moment(date).format('h:mm A');
@@ -843,6 +854,7 @@
                   });
 
                   this.users.forEach((item) => {
+
                       const person = { lat: Number(item.lat), lng: Number(item.lng) };
                       console.log(person);
 
@@ -858,13 +870,37 @@
                       } else {
                           batteryLevel = "0%";
                       }
-
+                      var status = this.getStatus(item.lastSeen);
 
 
                       const infowindow = new google.maps.InfoWindow({
-                          content: `<p class="d-none">agent|plate num</p><h6 class="text-capitalize d-flex align-items-center"><span class="offline-agent mr-2"></span> <span>${item.names} <small>${item.role} ${item.zone}</small></span></h6> <p class="pb-0 mb-0">Last seen at <strong>${item.lastAddress}</strong> at <i>${item.lastSeen}</i> <b>(${this.humanDateTimeAgo(item.lastSeen)})</b> </strong></p><p><strong>${item.des} ${item.distance} km</strong><div class="listview text-align-left text-capitalize pl-0">  <div class="listview__header text-align-left text-capitalize text-left"><strong>Battery ${batteryLevel}</strong> remaining</div> <div class="progress"> <div class="progress-bar progress-bar-warning" style="width: ${batteryLevel}" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div> </div></div></p>`,
+                          content: `<p>${status}</p><h6 class="text-capitalize d-flex align-items-center"><span class="offline-agent mr-2"></span> <span>${item.names} | <small>${item.role} | ${item.zone} | ${item.phoneNumber} | ${item.email}</small></span></h6> <p class="pb-0 mb-0">Last seen at <strong>${item.lastAddress}</strong> at <i>${item.lastSeen}</i> <b>(${this.humanDateTimeAgo(item.lastSeen)})</b> </strong></p><p><strong>${item.des} ${item.distance} km</strong><div class="listview text-align-left text-capitalize pl-0">  <div class="listview__header text-align-left text-capitalize text-left"><strong>Battery ${batteryLevel}</strong> remaining</div> <div class="progress"> <div class="progress-bar progress-bar-warning" style="width: ${batteryLevel}" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div> </div></div></p>`,
                       });
-                      let url = item.des === "WITHIN ZONE" ? "assets/images/users/active-agent.svg" : "assets/images/users/inactive-agent.svg";
+
+
+
+                      let url ;
+
+                      if(status === "Active"){
+
+                          if(item.des==="OUTSIDE ZONE"){
+                              url ="assets/images/users/outside-agent.svg"
+                          }else {
+                              url ="assets/images/users/active-agent.svg"
+
+                          }
+
+                      }else if(status==="Inactive"){
+                          if(item.des==="OUTSIDE ZONE"){
+                              url ="assets/images/users/outside-agent.svg"
+                          }else{
+                              url ="assets/images/users/inactive-agent.svg"
+                          }
+
+                      }else {
+                          url ="assets/images/users/dormant-agent.svg"
+                      }
+
                       //inactive agent icon
                       var agent = {
                           url: url, // url
@@ -881,9 +917,6 @@
                           infowindow.close();
                       });
                   });
-
-
-
 
 
 

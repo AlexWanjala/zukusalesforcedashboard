@@ -87,14 +87,6 @@
                                     <thead class="table-dark">
                                     <tr>
 
-                                        <th scope="col" style="width:70px">
-                                            <div class="the-mail-checkbox pr-4">
-                                                <label for="selectAll" class="d-none">Select All</label>
-                                                <input class="form-check-input mt-0 pt-0 form-check-dark" type="checkbox" id="selectAll">
-
-                                            </div>
-                                        </th>
-
                                         <th scope="col">Total</th>
                                         <th scope="col">Checking</th>
                                         <th scope="col">Absent</th>
@@ -113,15 +105,6 @@
                                     </tfoot>
                                     <tbody>
                                     <tr v-for="(item, index) in attendance" :value="item" :key="index">
-
-                                        <td style="background: rgba(176,226,253,0.51)">
-                                            <div class="d-flex  align-items-center">
-                                                <div class="the-mail-checkbox pr-4">
-                                                    <input class="form-check-input mt-0 pt-0 form-check-dark" type="checkbox">
-                                                </div>
-
-                                            </div>
-                                        </td>
 
                                         <td  style="background: rgba(176,226,253,0.51);  cursor: pointer;&:hover {background: yellow;}" >
                                             <a href="" title="View Details">{{item.Total}}</a>

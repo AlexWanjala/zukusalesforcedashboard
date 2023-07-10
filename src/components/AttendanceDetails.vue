@@ -88,16 +88,16 @@
 
                                         <th scope="col" style="width:70px">
                                             <div class="the-mail-checkbox pr-4">
-                                                <label for="selectAll" class="d-none">Select All</label>
-                                                <input class="form-check-input mt-0 pt-0 form-check-dark" type="checkbox" id="selectAll">
+                                                <label class="d-none">#</label>
 
                                             </div>
                                         </th>
-
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Checking</th>
-                                        <th scope="col">Checkout</th>
                                         <th scope="col">Date</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Check-in</th>
+                                        <th scope="col">Check-out</th>
+                                        <th scope="col">Hours Worked</th>
+
 
                                     </tr>
                                     </thead>
@@ -105,6 +105,7 @@
                                     <tr>
 
                                         <td class="text-capitalize" colspan="3">{{Present.length}} Agents</td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
 
@@ -115,11 +116,12 @@
                                         <td style="background: rgba(176,226,253,0.51)">
                                             <div class="d-flex  align-items-center">
                                                 <div class="the-mail-checkbox pr-4">
-                                                    <input class="form-check-input mt-0 pt-0 form-check-dark" type="checkbox">
+                                                    {{index+1}}.
                                                 </div>
 
                                             </div>
                                         </td>
+                                        <td style="background: rgba(253,225,176,0.51)">{{humanDate(item.Attendance.date)}}</td>
                                         <td  style="background: rgba(176,226,253,0.51)" >
                                             <a href="tel:{{item.Person.phoneNumber}}" title="View Details">{{item.Attendance.names}}</a>
                                             <p class="mb-0 pb-0">
@@ -129,11 +131,11 @@
                                                 <small><a href="tel:{{item.Person.phoneNumber}}">{{item.Person.phoneNumber}}</a> </small>
                                             </p>
                                             <p class="mb-0 pb-0">
-                                               <small>{{humanDateTimeAgo(item.Person.lastSeen)}}</small> @<small> <b><i>{{item.Person.lastAddress}}</i></b> {{item.Person.des}} <b>{{item.Person.distance}} KM </b></small>
+                                               <small>{{humanDateTimeAgo(item.Attendance.checkingTime)}}</small> @<small> <b><i>{{item.Attendance.checkingAddress}}</i></b> {{item.Person.des}} <b>{{item.Person.distance}} KM </b></small>
                                             </p>
 
                                         </td>
-                                        <td v-if="checkStatus(formattedDate(item.Attendance.checkingTime)) !='Late checking'" style="background: rgba(176,253,204,0.51)">
+                                        <td v-if="checkStatus(formattedDate(item.Attendance.checkingTime)) !='Late check in'" style="background: rgba(176,253,204,0.51)">
 
                                             <a title="View Details" style="color: #00abe4">{{formattedDate(item.Attendance.checkingTime)}}</a>
                                             <p class="mb-0 pb-0">
@@ -142,7 +144,7 @@
 
 
                                         </td>
-                                        <td v-if="checkStatus(formattedDate(item.Attendance.checkingTime))=='Late checking'" style="background: rgba(253,176,176,0.51)">
+                                        <td v-if="checkStatus(formattedDate(item.Attendance.checkingTime))=='Late check in'" style="background: rgba(253,176,176,0.51)">
 
                                             <a title="View Details" style="color: #00abe4">{{formattedDate(item.Attendance.checkingTime)}}</a>
                                             <p class="mb-0 pb-0">
@@ -156,7 +158,10 @@
                                                 <small>{{checkStatusCheckout(formattedDate(item.Attendance.checkoutTime))}}</small>
                                             </p>
                                         </td>
-                                        <td style="background: rgba(253,225,176,0.51)">{{humanDate(item.Attendance.date)}}</td>
+                                        <td style="background: rgba(176,229,253,0.51)">
+                                            <a style="color: #00abe4" title="View Details"> {{hoursWorked(item.Attendance.checkingTime,item.Attendance.checkoutTime)}} Hrs</a>
+                                        </td>
+
                                     </tr>
                                     </tbody>
                                 </table>
@@ -292,31 +297,47 @@
                 let earlyTime = moment('7:00 AM', 'h:mm A');
                 let lateTime = moment('8:00 AM', 'h:mm A');
                 if (checkTime.isBefore(earlyTime)) {
-                    return 'Early checking';
+                    return 'Early check in';
                 } else if (checkTime.isAfter(lateTime)) {
-                    return 'Late checking';
+                    return 'Late check in';
                 } else {
-                    return 'On time checking';
+                    return 'On time check in';
                 }},
             checkStatusCheckout(time) {
                 if(time==null){
-                    return 'No Checkout'
+                    return 'No Check out'
                 }
                 // Parse the time as a moment object
                 let checkTime = moment(time, 'h:mm A');
                 let earlyTime = moment('5:00 PM', 'h:mm A');
-                let normalTime = moment('7:00 PM', 'h:mm A');
+                let normalTime = moment('6:59 PM', 'h:mm A');
                 if (checkTime.isBefore(earlyTime)) {
-                    return 'early';
+                    return 'Early';
                 } else if (checkTime.isAfter(normalTime)) {
-                    return 'abnormal';
+                    return 'Forced checkout';
                 } else {
-                    return 'normal';
+                    return 'Normal';
                 }
             },
             humanDateTimeAgo(date) {
 
                 return moment(date).fromNow();
+
+            },
+            hoursWorked(checkingTime1,checkoutTime1){
+
+                   var  checkingTime = moment(checkingTime1, "YYYY-MM-DD HH:mm:ss")
+                   var checkoutTime = moment(checkoutTime1, "YYYY-MM-DD HH:mm:ss")
+
+                    var difference =  checkoutTime.diff(checkingTime);
+
+                   var hours = (difference / 3600000).toFixed(2);
+
+                   if(hours==null || hours =='NaN'){
+                       return null;
+                   }else {
+                       return hours;
+                   }
 
             },
             getAttendanceDetails(){

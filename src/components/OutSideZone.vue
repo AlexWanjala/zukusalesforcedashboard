@@ -82,13 +82,6 @@
                                     <thead class="table-dark">
                                     <tr>
 
-                                        <th scope="col" style="width:70px">
-                                            <div class="the-mail-checkbox pr-4">
-                                                <label for="selectAll" class="d-none">Select All</label>
-                                                <input class="form-check-input mt-0 pt-0 form-check-dark" type="checkbox" id="selectAll">
-
-                                            </div>
-                                        </th>
                                         <th scope="col">#</th>
                                         <th scope="col">Agent</th>
                                         <th scope="col">Contacts</th>
@@ -114,14 +107,6 @@
                                     <tbody>
                                     <tr  v-for="(item, index) in users" :value="item" :key="index">
 
-                                        <td>
-                                            <div class="d-flex  align-items-center">
-                                                <div class="the-mail-checkbox pr-4">
-                                                    <input class="form-check-input mt-0 pt-0 form-check-dark" type="checkbox" id="formCheck1">
-                                                </div>
-
-                                            </div>
-                                        </td>
                                         <td class="text-capitalize">{{index+1}}</td>
                                         <td class="text-capitalize">
                                             <a href="member-details.html" title="View Details">{{item.names}}</a>
