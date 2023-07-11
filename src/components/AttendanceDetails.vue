@@ -72,6 +72,13 @@
                     </div>
                 </div>
                 <!-- end page title -->
+                <div class="text-right">
+
+                    <a @click="downloadAttendanceDetails()" type="button" class="btn btn-primary dropdown-toggle option-selector me-3 text-capitalize"  data-toggle="modal" data-target="#selectDate">
+                        <i class="mdi mdi-download  font-size-10"></i> <span class="pl-1 d-md-inline">Download</span>
+                    </a>
+
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -212,7 +219,7 @@
 <script>
     import Navigation from "@/components/Navigation";
     import router from "@/router";
-    import {execute} from "@/api";
+    import {execute,executeDownload} from "@/api";
     import moment from 'moment';
     export default {
         name: "AttendanceDetails",
@@ -333,12 +340,25 @@
 
                    var hours = (difference / 3600000).toFixed(2);
 
-                   if(hours==null || hours =='NaN'){
+                   if(hours==null || hours === 'NaN'){
                        return null;
                    }else {
                        return hours;
                    }
 
+            },
+            downloadAttendanceDetails(){
+                const data = new FormData();
+                data.append("function", "downloadAttendanceDetails");
+                data.append("date", this.ActivityDate);
+                executeDownload(data).then(response => {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(response.data);
+                    link.download = this.ActivityDate+" Attendance.csv";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
             },
             getAttendanceDetails(){
                 this.Present.splice(0)

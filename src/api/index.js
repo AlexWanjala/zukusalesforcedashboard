@@ -7,3 +7,7 @@ let tokenStr = 'MTVlNmJkNDE1NWZiNDBiZTZlZTVmNjMwZDg5ZmNkMTU1NTRiOTM2MDBlY2U2ZmI2
 export const execute = (params) => {
     return axios.post(url,params,{headers: {"Authorization": `Bearer ${tokenStr}`}})
 }
+
+export const executeDownload = (params) => {
+    return axios.post(url,params,{headers: {"Authorization": `Bearer ${tokenStr}`}, responseType: 'blob'})
+}

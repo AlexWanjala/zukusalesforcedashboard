@@ -71,6 +71,14 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="text-right">
+
+                        <a @click="downloadAttendanceDetails()" type="button" class="btn btn-primary dropdown-toggle option-selector me-3 text-capitalize"  data-toggle="modal" data-target="#selectDate">
+                            <i class="mdi mdi-download  font-size-10"></i> <span class="pl-1 d-md-inline">Download</span>
+                        </a>
+
+                    </div>
                     <!-- end page title -->
                     <div class="row">
                         <div class="col-12">
@@ -202,7 +210,7 @@
 <script>
     import Navigation from "@/components/Navigation";
     import router from "@/router";
-    import {execute} from "@/api";
+    import {execute, executeDownload} from "@/api";
     import moment from 'moment';
     export default {
         name: "AttendanceDetails",
@@ -248,6 +256,19 @@
                     return  data;
                 }
 
+            },
+            downloadAttendanceDetails(){
+                const data = new FormData();
+                data.append("function", "downloadAttendanceAbsent");
+                data.append("date", this.ActivityDate);
+                executeDownload(data).then(response => {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(response.data);
+                    link.download = this.ActivityDate+" Absent.csv";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
             },
             humanDate(date) {
 

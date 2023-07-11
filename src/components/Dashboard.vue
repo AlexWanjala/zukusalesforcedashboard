@@ -58,127 +58,8 @@
                     <!-- quick stats -->
 
                     <div class="row">
-                        <div class="col-xl-4 px-sm-30px">
-                            <div class="card  text-white member-wedges-card index-live-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                            <h6 class="text-white text-uppercase">Agents Stats Today</h6>
-                                        </div>
-                                        <div class="col-sm-12 mb-3">
-                                            <div class="live-data-card">
-                                                <div class="">
-                                                    <div class="me-3">
-                                                        <img src="assets/images/index-icons/resume.png" alt="">
-                                                    </div>
-                                                    <span class="avatar-title rounded-circle bg-warning font-size-16 d-none">
-                                                        <!-- <i class="mdi mdi-sticker-alert text-white"></i> -->
-                                                        <img src="assets/images/index-icons/resume.png" alt="">
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <p class="text-muted mb-1">Online
-                                                    </p>
-                                                    <h5 class="mb-0">{{attendanceStats.online}}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12 mb-3">
-                                            <div class="live-data-card">
-                                                <div class="">
-                                                    <div class="me-3">
-                                                        <img src="assets/images/index-icons/badge.png" alt="">
-                                                    </div>
-                                                    <span class="avatar-title rounded-circle bg-warning font-size-16 d-none">
-                                                        <!-- <i class="mdi mdi-sticker-alert text-white"></i> -->
-                                                        <img src="assets/images/index-icons/offline.png" alt="">
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <p class="text-muted mb-1">Offline</p>
-                                                    <h5 class="mb-0">{{attendanceStats.offline}}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mb-3">
-                                            <div class="live-data-card">
-                                                <div class="">
-                                                    <div class="me-3">
-                                                        <img src="assets/images/index-icons/danger.png" alt="">
-                                                    </div>
-                                                    <span class="avatar-title rounded-circle bg-warning font-size-16 d-none">
-                                                        <!-- <i class="mdi mdi-sticker-alert text-white"></i> -->
-                                                        <img src="assets/images/index-icons/monitor.png" alt="">
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <p class="text-muted mb-1">Within Zone</p>
-                                                    <h5 class="mb-0">{{attendanceStats.withinZone}}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mb-3">
-                                            <div class="live-data-card">
-                                                <div class="">
-                                                    <div class="me-3">
-                                                        <img src="assets/images/index-icons/expired.png" alt="">
-                                                    </div>
-                                                    <span class="avatar-title rounded-circle bg-warning font-size-16 d-none">
-                                                        <!-- <i class="mdi mdi-sticker-alert text-white"></i> -->
-                                                        <img src="assets/images/index-icons/offline.png" alt="">
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <p class="text-muted mb-1">Outside Zone
-                                                    </p>
-                                                    <h5 class="mb-0">{{attendanceStats.outsideZone}}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mb-3 d-non">
-                                            <div class="live-data-card">
-                                                <div class="">
-                                                    <div class="me-3">
-                                                        <img src="assets/images/index-icons/doctor-appointment.png" alt="">
-                                                    </div>
-                                                    <span class="avatar-title rounded-circle bg-warning font-size-16 d-none">
-                                                        <!-- <i class="mdi mdi-sticker-alert text-white"></i> -->
-                                                        <img src="assets/images/index-icons/doctor-appointment.png" alt="">
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <p class="text-muted mb-1">Total Staff
-                                                    </p>
-                                                    <h5 class="mb-0">{{attendanceStats.total}}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12 mb-3 d-none">
-                                            <div class="live-data-card">
-                                                <div class="">
-                                                    <div class="me-3">
-                                                        <img src="assets/images/index-icons/id-card.png" alt="">
-                                                    </div>
-                                                    <span class="avatar-title rounded-circle bg-warning font-size-16 d-none">
-                                                        <!-- <i class="mdi mdi-sticker-alert text-white"></i> -->
-                                                        <img src="assets/images/index-icons/car-accident.png" alt="">
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <p class="text-muted mb-1">NHIF STAFF</p>
-                                                    <h5 class="mb-0">43</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 px-sm-30px text-capitalize">
-                            <div class="row">
+                        <div class="col-xl-12 px-sm-30px text-capitalize">
+                            <div class="row" style="alignment: center">
                                 <div class="col-sm-4" style="cursor: pointer;" @click="gotTo('agents')">
                                     <div class="card">
                                         <div class="card-body">
@@ -209,7 +90,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="d-flex flex-column">
-                                                    <span>Present</span>
+                                                    <span>Present Today</span>
                                                     <h4  class="text-uppercase">{{attendance.TotalCheckIn}}</h4>
                                                 </div>
                                             </div>
@@ -228,7 +109,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="d-flex flex-column">
-                                                    <span>Absent</span>
+                                                    <span>Absent Today</span>
                                                     <h4  class="text-uppercase">{{attendance.TotalAbsent}}</h4>
                                                 </div>
                                             </div>
@@ -236,6 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <div class="col-xl-12 px-sm-30px">
                                     <div class="card">
@@ -271,6 +153,34 @@
                                     <div id="map" class="h-80" dir="ltr">
 
                                     </div>
+
+                                    <div class="card-footer bg-danger bg-warning bg-success p-4">
+                                        <div class="row">
+
+                                            <div class="col-2">
+                                                <p class="text-light mb-0 opacity-75">Active</p>
+                                                <h5 class="text-white mb-0">{{attendanceStats.active}}</h5>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="text-light mb-0 opacity-75">Inactive</p>
+                                                <h5 class="text-white mb-0">{{attendanceStats.inactive}}</h5>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="text-light mb-0 opacity-75">Dormant</p>
+                                                <h5 class="text-white mb-0">{{attendanceStats.dormant}}</h5>
+                                            </div>
+
+                                            <div class="col-2">
+                                                <p class="text-light mb-0 opacity-75">Within</p>
+                                                <h5 class="text-white mb-0">{{attendanceStats.withinZone}}</h5>
+                                            </div>
+                                            <div class="col-2">
+                                                <p class="text-light mb-0 opacity-75">Outside</p>
+                                                <h5 class="text-white mb-0">{{attendanceStats.outsideZone}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                 </div>
 
@@ -344,6 +254,8 @@
                             </div>
                             <!--end card-->
                         </div>
+
+
 
                         <div class="col-xl-6 col-lg-5 col-sm-12">
                             <div class="row">
@@ -629,6 +541,12 @@
 
         },
         methods: {
+            getMonthName(monthNumber){
+
+                let monthMap = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'}; // create a map of month numbers and names
+                return monthMap[monthNumber];
+            },
+
             getStatus(time) {
                 const now = Date.now();
                 const then = Date.parse(time);
@@ -716,7 +634,7 @@
 
 
                             this.attendanceAvg.forEach(item => {
-                                this.months.push(item.month)
+                                this.months.push(this.getMonthName(item.month))
                                 this.Total.push(parseInt(item.total));
                                 this.Present.push(parseInt(item.present));
                                 this.Absent.push(parseInt(item.absent));

@@ -93,6 +93,7 @@
                                         <th scope="col">Agent</th>
                                         <th scope="col">Contacts</th>
                                         <th scope="col">Zone</th>
+                                        <th scope="col">Role</th>
                                         <th scope="col">Status</th>
                                         <th scope="col" class="text-right">Battery</th>
                                     </tr>
@@ -103,6 +104,7 @@
 
                                         </td>
                                         <td class="text-capitalize" colspan="3">{{users.length}}</td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td class="text-right text-uppercase">
@@ -139,6 +141,9 @@
                                         </td>
                                         <td class="text-capitalize">
                                             <a >{{item.zone}}</a>
+                                        </td>
+                                        <td class="text-capitalize">
+                                            <a >{{item.role}}</a>
                                         </td>
                                         <td>
                                             <span v-if="item.des=='WITHIN ZONE'" class="text-uppercase  badge badge-soft-success">{{item.des}}</span>
